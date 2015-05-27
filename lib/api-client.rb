@@ -15,10 +15,10 @@ module Api
       @configuration ||= Api::Client::Configuration.new
     end
 
-    autoload :Configuration,  'exec-client/configuration'
-    autoload :Repository,     'exec-client/repository'
-    autoload :User,           'exec-client/user'
-    autoload :Key,            'exec-client/key'
-    autoload :Space,          'exec-client/space'
+    autoload :Configuration,  'api-client/configuration'
+    autoload :Repository,     'api-client/repository'
+    autoload :User,           'api-client/user'
+    autoload :Key,            'api-client/key'
+    autoload :Space,          'api-client/space'
   end
 end

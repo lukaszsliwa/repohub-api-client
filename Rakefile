@@ -22,5 +22,6 @@ Jeweler::Tasks.new do |gem|
   gem.email = "lukasz.sliwa@apptamers.com"
   gem.authors = ["Łukasz Śliwa"]
   gem.version = Api::Client::VERSION
+  gem.files =  FileList["[A-Z]*", "{lib,spec}/**/*"]
 end
 Jeweler::RubygemsDotOrgTasks.new

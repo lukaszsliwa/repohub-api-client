@@ -18,12 +18,24 @@ Gem::Specification.new do |s|
     "README.rdoc"
   ]
   s.files = [
-    ".document",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
-    "lib/api-client.rb"
+    "lib/api-client.rb",
+    "lib/api-client/configuration.rb",
+    "lib/api-client/developer.rb",
+    "lib/api-client/key.rb",
+    "lib/api-client/repository.rb",
+    "lib/api-client/space.rb",
+    "spec/lib/api-client/configuration_spec.rb",
+    "spec/lib/api-client/key_spec.rb",
+    "spec/lib/api-client/repository_spec.rb",
+    "spec/lib/api-client/space_spec.rb",
+    "spec/lib/api-client/user_spec.rb",
+    "spec/lib/api-client_spec.rb",
+    "spec/spec_helper.rb"
   ]
   s.homepage = "http://git.apptamers.com/repohub/api-client"
   s.licenses = ["MIT"]
