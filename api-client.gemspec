@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["\u{141}ukasz \u{15a}liwa"]
-  s.date = "2015-05-27"
+  s.date = "2015-05-28"
   s.email = "lukasz.sliwa@apptamers.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -26,14 +26,15 @@ Gem::Specification.new do |s|
     "lib/api-client.rb",
     "lib/api-client/configuration.rb",
     "lib/api-client/developer.rb",
+    "lib/api-client/developer/repository.rb",
     "lib/api-client/key.rb",
     "lib/api-client/repository.rb",
     "lib/api-client/space.rb",
     "spec/lib/api-client/configuration_spec.rb",
+    "spec/lib/api-client/developer_spec.rb",
     "spec/lib/api-client/key_spec.rb",
     "spec/lib/api-client/repository_spec.rb",
     "spec/lib/api-client/space_spec.rb",
-    "spec/lib/api-client/user_spec.rb",
     "spec/lib/api-client_spec.rb",
     "spec/spec_helper.rb"
   ]
