@@ -7,5 +7,9 @@ class Api::Client::Developer < ActiveResource::Base
     Api::Client::Developer::Repository.put(repository_id, developer_id: developer_id)
   end
 
+  def self.deny(developer_id, repository_id)
+    Api::Client::Developer::Repository.delete(repository_id, developer_id: developer_id)
+  end
+
   autoload :Repository, 'api-client/developer/repository'
 end
