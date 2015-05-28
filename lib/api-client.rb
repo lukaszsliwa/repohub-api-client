@@ -17,7 +17,7 @@ module Api
 
     autoload :Configuration,  'api-client/configuration'
     autoload :Repository,     'api-client/repository'
-    autoload :User,           'api-client/user'
+    autoload :Developer,      'api-client/developer'
     autoload :Key,            'api-client/key'
     autoload :Space,          'api-client/space'
   end
