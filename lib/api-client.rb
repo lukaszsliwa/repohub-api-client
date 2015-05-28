@@ -8,6 +8,7 @@ module Api
     VERSION = '1.0.0'
 
     def self.configure(&block)
+      @configuration = nil
       block.call configuration
     end
 
