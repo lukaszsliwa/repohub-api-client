@@ -1,4 +1,4 @@
-class Api::Client::Developer < ActiveResource::Base
+class Api::Client::Developer < Api::Client::Base
   extend ActiveSupport::Autoload
 
   self.site = Api::Client.configuration.url_with_version

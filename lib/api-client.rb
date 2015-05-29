@@ -16,6 +16,7 @@ module Api
       @configuration ||= Api::Client::Configuration.new
     end
 
+    autoload :Base,           'api-client/base'
     autoload :Configuration,  'api-client/configuration'
     autoload :Repository,     'api-client/repository'
     autoload :Developer,      'api-client/developer'
