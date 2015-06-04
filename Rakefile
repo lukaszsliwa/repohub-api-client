@@ -15,7 +15,7 @@ require 'jeweler'
 require './lib/api-client.rb'
 
 Jeweler::Tasks.new do |gem|
-  gem.name = "api-client"
+  gem.name = "repofs-api-client"
   gem.homepage = "http://git.apptamers.com/repohub/api-client"
   gem.license = "MIT"
   gem.summary = %Q{API Client}
