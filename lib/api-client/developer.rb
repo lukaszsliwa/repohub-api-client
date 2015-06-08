@@ -8,12 +8,12 @@ class Api::Client::Developer
 
   def self.allow(developer_id, space_id, repository_id, headers = {}, from = nil)
     from = "#{url}/#{developer_id}/repositories" if from.nil?
-    Api::Client::Developer::Repository.put(repository_id, {developer_id: developer_id, space_id: space_id}, headers, from)
+    Api::Client::Developer::Repository.create({space_id: space_id, repository_id: repository_id}, headers, from)
   end
 
   def self.deny(developer_id, space_id, repository_id, headers = {}, from = nil)
     from = "#{url}/#{developer_id}/repositories" if from.nil?
-    Api::Client::Developer::Repository.delete(repository_id, {developer_id: developer_id, space_id: space_id}, headers, from)
+    Api::Client::Developer::Repository.delete(repository_id, {space_id: space_id, repository_id: repository_id}, headers, from)
   end
 
   autoload :Repository, 'api-client/developer/repository'
