@@ -1,5 +1,6 @@
 require 'active_support'
-require 'active_resource'
+require 'httparty'
+require 'crack'
 
 module Api
   module Client
@@ -16,6 +17,7 @@ module Api
       @configuration ||= Api::Client::Configuration.new
     end
 
+    autoload :Methods,        'api-client/methods'
     autoload :Base,           'api-client/base'
     autoload :Configuration,  'api-client/configuration'
     autoload :Repository,     'api-client/repository'

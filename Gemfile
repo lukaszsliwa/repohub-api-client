@@ -1,7 +1,8 @@
 source "http://rubygems.org"
 
 gem 'activesupport'
-gem 'activeresource', '~> 4.0.0', require: 'active_resource'
+gem 'httparty', '~> 0.13.1'
+gem 'crack', '~> 0.4.2'
 
 group :development do
   gem "bundler", "~> 1.0"
