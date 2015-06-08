@@ -2,7 +2,7 @@ class Api::Client::Base
   def self.all(url, params = {}, headers = {})
     response = HTTParty.get(url, query: params, headers: default_headers.merge(headers))
     collections = response.parsed_response
-    collections.values.first.map do |attributes|
+    collections.map do |attributes|
       OpenStruct.new attributes
     end
   end
