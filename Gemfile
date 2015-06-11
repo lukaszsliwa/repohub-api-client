@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
 gem 'activesupport'
+gem 'activemodel'
 gem 'httparty', '~> 0.13.1'
 gem 'crack', '~> 0.4.2'
 

@@ -1,33 +1,54 @@
 class Api::Client::Base
-  def self.all(url, params = {}, headers = {})
-    response = HTTParty.get(url, query: params, headers: default_headers.merge(headers))
-    collections = response.parsed_response
-    collections.map do |attributes|
-      OpenStruct.new attributes
+  extend ActiveModel::Naming
+  include ActiveModel::Validations
+  include ActiveModel::Translation
+
+  class << self
+    def all(params = {}, headers = {}, from = url)
+      Api::Client::Request.all self, from, params, headers
+    end
+
+    def find(id, params = {}, headers = {}, from = url)
+      Api::Client::Request.find self, from, id, params, headers
+    end
+
+    def create(params = {}, headers = {}, from = url)
+      Api::Client::Request.create self, from, params, headers
+    end
+
+    def put(id, params = {}, headers = {}, from = url)
+      Api::Client::Request.put self, from, id, params, headers
+    end
+
+    def delete(id, params = {}, headers = {}, from = url)
+      Api::Client::Request.delete self, from, id, params, headers
+    end
+
+    def build_from_response(params = {})
+      object = new
+      object.define_singleton_method(:errors) do
+        @errors ||= ActiveModel::Errors.new(object)
+      end
+      object.define_singleton_method(:attributes) { params.dup }
+      object.define_singleton_method(:inspect) do
+        "#<#{self.class} #{method(:attributes).call.map { |key, value| "#{key}=\"#{value}\""}.join(' ')}>"
+      end
+      if (errors = params.delete 'errors').present?
+        errors.each do |key, values|
+          values.each { |value| object.errors[key] << value }
+        end
+      end
+      params.each do |key, value|
+        object.define_singleton_method(key.to_sym) do
+          Integer(value) rescue nil || JSON.parse(value) rescue nil ||
+              Date.parse(value) rescue nil || DateTime.parse(value) rescue nil || value
+        end
+      end
+      object
     end
   end
 
-  def self.find(url, id, params = {}, headers = {})
-    response = HTTParty.get "#{url}/#{id}", query: params, headers: default_headers.merge(headers)
-    OpenStruct.new response.parsed_response
-  end
-
-  def self.create(url, params = {}, headers = {})
-    response = HTTParty.post url, query: params, headers: default_headers.merge(headers)
-    OpenStruct.new response.parsed_response
-  end
-
-  def self.put(url, id, params = {}, headers = {})
-    response = HTTParty.put "#{url}/#{id}", query: params, headers: default_headers.merge(headers)
-    OpenStruct.new response.parsed_response
-  end
-
-  def self.delete(url, id, params = {}, headers = {})
-    response = HTTParty.delete "#{url}/#{id}", query: params, headers: default_headers.merge(headers)
-    OpenStruct.new response.parsed_response
-  end
-
-  def self.default_headers
-    { 'API-KEY' => Api::Client.configuration.token }
+  def done?
+    errors.messages.empty?
   end
 end

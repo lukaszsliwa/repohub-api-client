@@ -1,6 +1,5 @@
-class Api::Client::Developer
+class Api::Client::Developer < Api::Client::Base
   extend ActiveSupport::Autoload
-  extend Api::Client::Methods
 
   def self.url
     @url ||= "#{Api::Client.configuration.url_with_version}/developers"

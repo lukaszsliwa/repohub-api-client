@@ -1,6 +1,4 @@
-class Api::Client::Space
-  extend Api::Client::Methods
-
+class Api::Client::Space < Api::Client::Base
   def self.url
     @url ||= "#{Api::Client.configuration.url_with_version}/spaces"
   end
