@@ -40,8 +40,7 @@ class Api::Client::Base
       end
       params.each do |key, value|
         object.define_singleton_method(key.to_sym) do
-          Integer(value) rescue nil || JSON.parse(value) rescue nil ||
-              Date.parse(value) rescue nil || DateTime.parse(value) rescue nil || value
+          Integer(value) rescue nil || JSON.parse(value) rescue nil || value
         end
       end
       object
