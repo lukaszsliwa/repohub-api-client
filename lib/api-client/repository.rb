@@ -1,5 +1,5 @@
 class Api::Client::Repository < Api::Client::Base
-  attr_accessor :id, :handle, :name, :space_id, :handle_with_space, :path, :allowed, :users_count, :users, :created_by_id, :created_at, :updated_at
+  attr_accessor :id, :handle, :name, :space_handle, :handle_with_space, :path, :allowed, :users_count, :users, :created_by_id, :created_at, :updated_at
 
   def self.url
     @url ||= "#{configuration.url_with_version}/repositories"
@@ -10,6 +10,6 @@ class Api::Client::Repository < Api::Client::Base
   end
 
   def destroy
-    Api::Client::Request.delete(Api::Client::Repository, handle, {space_id: space_id})
+    Api::Client::Request.delete(Api::Client::Repository, handle, {space_handle: space_handle})
   end
 end
