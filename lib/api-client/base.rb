@@ -3,6 +3,8 @@ class Api::Client::Base
   include ActiveModel::Validations
   include ActiveModel::Translation
 
+  attr_accessor :message, :request, :errors
+
   def initialize(params = {})
     load params
   end
@@ -34,9 +36,7 @@ class Api::Client::Base
   end
 
   def load(params = {})
-    define_singleton_method(:errors) do
-      @errors ||= ActiveModel::Errors.new self
-    end
+    self.errors = ActiveModel::Errors.new self
     define_singleton_method(:attributes) { params.dup }
     define_singleton_method(:inspect) do
       "#<#{self.class} #{method(:attributes).call.map { |key, value| "#{key}=\"#{value}\""}.join(' ')}>"
@@ -47,9 +47,8 @@ class Api::Client::Base
       end
     end
     params.each do |key, value|
-      define_singleton_method(key.to_sym) do
-        Integer(value) rescue nil || JSON.parse(value) rescue nil || value
-      end
+      converted = Integer(value) rescue nil || JSON.parse(value) rescue nil || value
+      method("#{key}=".to_sym).call(converted)
     end
   end
 
