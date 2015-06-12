@@ -47,8 +47,7 @@ class Api::Client::Base
       end
     end
     params.each do |key, value|
-      converted = Integer(value) rescue nil || JSON.parse(value) rescue nil || value
-      method("#{key}=".to_sym).call(converted)
+      self.send("#{key}=".to_sym, value)
     end
   end
 
