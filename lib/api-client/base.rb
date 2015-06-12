@@ -41,9 +41,9 @@ class Api::Client::Base
     define_singleton_method(:inspect) do
       "#<#{self.class} #{method(:attributes).call.map { |key, value| "#{key}=\"#{value}\""}.join(' ')}>"
     end
-    if (errors = params.delete 'errors').present?
-      errors.each do |key, values|
-        values.each { |value| object.errors[key] << value }
+    if (errors_ = params.delete 'errors').present?
+      errors_.each do |key, values|
+        values.each { |value| errors[key] << value }
       end
     end
     params.each do |key, value|
