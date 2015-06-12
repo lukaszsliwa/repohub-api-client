@@ -36,11 +36,8 @@ class Api::Client::Base
   end
 
   def load(params = {})
-    self.errors = ActiveModel::Errors.new self
-    define_singleton_method(:attributes) { params.dup }
-    define_singleton_method(:inspect) do
-      "#<#{self.class} #{method(:attributes).call.map { |key, value| "#{key}=\"#{value}\""}.join(' ')}>"
-    end
+    @errors = ActiveModel::Errors.new self
+    @params = params.dup
     if (errors_ = params.delete 'errors').present?
       errors_.each do |key, values|
         values.each { |value| errors[key] << value }
@@ -51,7 +48,15 @@ class Api::Client::Base
     end
   end
 
-  def done?
-    errors.messages.empty?
+  def attributes
+    @params || {}
+  end
+
+  def inspect
+    "#<#{self.class} #{attributes.map { |key, value| "#{key}=\"#{value}\""}.join(' ')}>"
+  end
+
+  def destroy
+    Api::Client::Request.delete self.class, id
   end
 end
