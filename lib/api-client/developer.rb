@@ -7,6 +7,10 @@ class Api::Client::Developer < Api::Client::Base
     @url ||= "#{configuration.url_with_version}/developers"
   end
 
+  def to_param
+    login
+  end
+
   def self.allow(developer_id, space_id, repository_id)
     Api::Client::Developer::Repository.create(space_id: space_id, repository_id: repository_id, developer_id: developer_id)
   end

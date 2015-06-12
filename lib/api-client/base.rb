@@ -56,7 +56,11 @@ class Api::Client::Base
     "#<#{self.class} #{attributes.map { |key, value| "#{key}=\"#{value}\""}.join(' ')}>"
   end
 
+  def to_param
+    id
+  end
+
   def destroy
-    Api::Client::Request.delete self.class, id
+    Api::Client::Request.delete self.class, to_param
   end
 end
