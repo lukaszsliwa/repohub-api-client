@@ -4,7 +4,7 @@ require 'httparty'
 require 'crack'
 
 module Api
-  module Client
+  class Client
     extend ActiveSupport::Autoload
 
     VERSION = '1.0.5'
@@ -18,6 +18,25 @@ module Api
       @configuration ||= Api::Client::Configuration.new
     end
 
+    def configure(&block)
+      @configuration = nil
+      block.call configuration
+    end
+
+    def configuration
+      @configuration ||= Api::Client::Configuration.new
+    end
+
+    def within(&block)
+      Thread.current[:configuration] = configuration
+      begin
+        block.call
+      ensure
+        Thread.current[:configuration] = nil
+      end
+    end
+
+    autoload :Connection,      'api-client/connection'
     autoload :Request,         'api-client/request'
     autoload :Base,            'api-client/base'
     autoload :Configuration,   'api-client/configuration'

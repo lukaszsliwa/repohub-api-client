@@ -19,6 +19,26 @@
 
 require 'api-client'
 
+#Api::Client.configure do |configuration|
+#  configuration.version = 'v1'
+#  configuration.token   = '719f4124b1b170ddf8ca176e6732992f'
+#  configuration.url     = 'http://api.repohub.dev'
+#end
+
+#api_client = Api::Client.new
+
+#api_client.configure do |c|
+#  c.version = 'v1'
+#  c.token   = '719f4124b1b170ddf8ca176e6732992f'
+#  c.url     = 'http://api.repohub.dev'
+#end
+
+#api_client.within do
+#  puts Api::Client::Repository.create(handle: 'test1234567890').inspect
+#  puts Api::Client::Repository.create(handle: 'test1234567890').inspect
+#  puts Api::Client::Repository.delete('test1234567890').inspect
+#end
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

@@ -1,5 +1,5 @@
 class Api::Client::Repository < Api::Client::Base
   def self.url
-    @url ||= "#{Api::Client.configuration.url_with_version}/repositories"
+    @url ||= "#{configuration.url_with_version}/repositories"
   end
 end

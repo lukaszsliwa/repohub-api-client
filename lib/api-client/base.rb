@@ -4,24 +4,24 @@ class Api::Client::Base
   include ActiveModel::Translation
 
   class << self
-    def all(params = {}, headers = {}, from = url)
-      Api::Client::Request.all self, from, params, headers
+    def all(params = {})
+      Api::Client::Request.all self, params
     end
 
-    def find(id, params = {}, headers = {}, from = url)
-      Api::Client::Request.find self, from, id, params, headers
+    def find(id, params = {})
+      Api::Client::Request.find self, id, params
     end
 
-    def create(params = {}, headers = {}, from = url)
-      Api::Client::Request.create self, from, params, headers
+    def create(params = {})
+      Api::Client::Request.create self, params
     end
 
-    def put(id, params = {}, headers = {}, from = url)
-      Api::Client::Request.put self, from, id, params, headers
+    def put(id, params = {})
+      Api::Client::Request.put self, id, params
     end
 
-    def delete(id, params = {}, headers = {}, from = url)
-      Api::Client::Request.delete self, from, id, params, headers
+    def delete(id, params = {})
+      Api::Client::Request.delete self, id, params
     end
 
     def build_from_response(params = {})
@@ -44,6 +44,10 @@ class Api::Client::Base
         end
       end
       object
+    end
+
+    def configuration
+      Thread.current[:configuration] || Api::Client.configuration
     end
   end
 

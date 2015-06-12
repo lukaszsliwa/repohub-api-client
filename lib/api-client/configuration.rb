@@ -5,7 +5,7 @@ class Api::Client::Configuration
     @url_with_version ||= [url, version].join '/'
   end
 
-  def api_key
-    @api_key ||= self.token
+  def default_headers
+    { 'API-KEY' => self.token }
   end
 end
