@@ -7,7 +7,7 @@ module Api
   class Client
     extend ActiveSupport::Autoload
 
-    VERSION = '1.1.2'
+    VERSION = '1.1.3'
 
     def self.configure(&block)
       @configuration = nil
