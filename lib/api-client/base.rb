@@ -11,23 +11,28 @@ class Api::Client::Base
 
   class << self
     def all(params = {})
-      Api::Client::Request.all self, params
+      url = params.delete :url
+      Api::Client::Request.all self, params, url
     end
 
     def find(id, params = {})
-      Api::Client::Request.find self, id, params
+      url = params.delete :url
+      Api::Client::Request.find self, id, params, url
     end
 
     def create(params = {})
-      Api::Client::Request.create self, params
+      url = params.delete :url
+      Api::Client::Request.create self, params, url
     end
 
     def put(id, params = {})
-      Api::Client::Request.put self, id, params
+      url = params.delete :url
+      Api::Client::Request.put self, id, params, url
     end
 
     def delete(id, params = {})
-      Api::Client::Request.delete self, id, params
+      url = params.delete :url
+      Api::Client::Request.delete self, id, params, url
     end
 
     def configuration
@@ -36,6 +41,7 @@ class Api::Client::Base
   end
 
   def load(params = {})
+    params ||= {}
     @errors = ActiveModel::Errors.new self
     @params = params.dup
     if (errors_ = params.delete 'errors').present?

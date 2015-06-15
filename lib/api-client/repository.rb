@@ -12,4 +12,17 @@ class Api::Client::Repository < Api::Client::Base
   def destroy
     Api::Client::Request.delete(Api::Client::Repository, handle, {space_handle: space_handle})
   end
+
+  def self.split_handle(handle)
+    items = (handle || '').split '/'
+    case items.size
+      when 0
+        space_handle = repository_id = nil
+      when 1
+        space_handle, repository_id = nil, items[0]
+      else
+        space_handle, repository_id = items[0], items[1]
+    end
+    return space_handle, repository_id
+  end
 end

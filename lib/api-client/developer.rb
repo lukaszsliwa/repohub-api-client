@@ -11,12 +11,16 @@ class Api::Client::Developer < Api::Client::Base
     login
   end
 
-  def self.allow(developer_id, space_id, repository_id)
-    Api::Client::Developer::Repository.create(space_id: space_id, repository_id: repository_id, developer_id: developer_id)
+  def self.allow(developer_id, handle_with_space)
+    space, repository_id = Api::Client::Repository.split_handle(handle_with_space)
+    url = Api::Client::Developer::Repository.url(developer_id)
+    Api::Client::Developer::Repository.create(space_handle: space, repository_id: repository_id, developer_id: developer_id, url: url)
   end
 
-  def self.deny(developer_id, space_id, repository_id)
-    Api::Client::Developer::Repository.delete(developer_id, repository_id, {space_id: space_id, repository_id: repository_id})
+  def self.deny(developer_id, handle_with_space)
+    space, repository_id = Api::Client::Repository.split_handle(handle_with_space)
+    url = Api::Client::Developer::Repository.url(developer_id)
+    Api::Client::Developer::Repository.delete(developer_id, {space_handle: space, repository_id: repository_id, url: url})
   end
 
   autoload :Repository, 'api-client/developer/repository'
