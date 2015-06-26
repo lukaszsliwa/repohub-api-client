@@ -4,6 +4,7 @@ gem 'activesupport'
 gem 'activemodel'
 gem 'httparty', '~> 0.13.1'
 gem 'crack', '~> 0.4.2'
+gem 'oauth2'
 
 group :development do
   gem "bundler", "~> 1.0"

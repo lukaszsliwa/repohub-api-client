@@ -90,4 +90,5 @@ DEPENDENCIES
   crack (~> 0.4.2)
   httparty (~> 0.13.1)
   jeweler (~> 2.0.1)
+  oauth2
   rspec (~> 3.2)

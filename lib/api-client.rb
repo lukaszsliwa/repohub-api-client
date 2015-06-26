@@ -2,12 +2,13 @@ require 'active_support'
 require 'active_model'
 require 'httparty'
 require 'crack'
+require 'oauth2'
 
 module Api
   class Client
     extend ActiveSupport::Autoload
 
-    VERSION = '1.1.7'
+    VERSION = '1.1.8'
 
     def self.configure(&block)
       @configuration = nil
